@@ -1,6 +1,8 @@
 import Lesson from "@/models/Lesson"
 import LessonConclusion from "./LessonConclusion"
 import { IconVideo } from "@tabler/icons-react"
+import { useContext } from "react";
+import CourseContext from "@/contexts/CourseContext";
 
 interface LessonItemProps {
     lesson: Lesson
@@ -8,10 +10,14 @@ interface LessonItemProps {
 }
 
 export default function LessonItem({ lesson, selected }: LessonItemProps) {
+  const { lessonSelection, changeLessonConclusion } = useContext(CourseContext);
+
   return (
     <div className="flex items-center gap-2 py-1">
-        <LessonConclusion concluded={false} onClick={() => console.log("baby")}/>
-        <div className="flex flex-1 flex-col cursor-pointer">
+        <LessonConclusion concluded={lesson.conclusion ?? false} onClick={() => changeLessonConclusion(lesson)}/>
+        <div className="flex flex-1 flex-col cursor-pointer"
+          onClick={() => lessonSelection(lesson)}
+        >
             <span className={`
               ${selected && "text-yellow-400"}
             `}>

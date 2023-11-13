@@ -1,7 +1,10 @@
 import chapters from "@/constants/chapters";
+import CourseContext from "@/contexts/CourseContext";
+import { useContext } from "react";
 
 export default function Player() {
-  const currentLesson = chapters[0].lessons[0];
+  const { currentLesson } = useContext(CourseContext);
+   
   return (
     <div
       className="
